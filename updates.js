@@ -1,4 +1,4 @@
-const handleTaskCompletions = (e) => {
+const handleCompletion = (e) => {
     const tick = e.target.closest('.tick');
     if (!tick) return;
   
@@ -9,4 +9,4 @@ const handleTaskCompletions = (e) => {
     localStorage.setItem('storage-task', JSON.stringify(task));
   };
   
-  export default handleTaskCompletions;
+  export default handleCompletion;
