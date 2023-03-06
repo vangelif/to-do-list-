@@ -1,4 +1,4 @@
-import handleTaskCompletions from './updates.js';
+import completion from './updates.js';
 import {
   itemValue,
   itemsDisplay,
@@ -9,7 +9,7 @@ import {
 
 let todos = [];
 
-const displayTask = () => {
+const display = () => {
   itemsDisplay.innerHTML = '';
   todos = JSON.parse(localStorage.getItem('storage-task')) || [];
   todos.forEach((element) => {
@@ -45,11 +45,11 @@ const displayTask = () => {
   });
 };
 document.addEventListener('DOMContentLoaded', () => {
-  displayTask();
+  display();
 });
 
 syncBtn.addEventListener('click', () => {
-  displayTask();
+  display();
 });
 // it hears clicks and pushes value to container
 // updates storage
@@ -69,7 +69,7 @@ addItemBtn.addEventListener('click', (e) => {
   localStorage.setItem('storage-task', JSON.stringify(todos));
 
   itemValue.value = '';
-  displayTask();
+  display();
 });
 
 // remove function which updates the index
@@ -81,7 +81,7 @@ const removeTask = (index) => {
   });
   todos.push(...removeTasks);
   localStorage.setItem('storage-task', JSON.stringify(todos));
-  displayTask();
+  display();
 };
 // remove event listener with calling remove function
 itemsDisplay.addEventListener('click', (e) => {
@@ -97,7 +97,7 @@ const eraseAll = () => {
   const notDone = task.filter((todo) => !todo.completed);
   localStorage.removeItem('storage-task');
   localStorage.setItem('storage-task', JSON.stringify(notDone));
-  displayTask();
+  display();
 };
 
 eraseAllBtn.addEventListener('click', () => {
@@ -105,4 +105,4 @@ eraseAllBtn.addEventListener('click', () => {
 });
 
 // toggles completion status and updates storage
-document.addEventListener('change', handleTaskCompletions);
+document.addEventListener('change', completion);
